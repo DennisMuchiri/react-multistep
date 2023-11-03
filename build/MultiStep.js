@@ -83,7 +83,9 @@ function MultiStep(props) {
             setPrevButtonHidden(true);
         }
         else {
+            console.debug(`stepStateChanged UNHIDING BUTTON 1`);
             if (prevButtonHidden == true) {
+                console.debug(`stepStateChanged UNHIDING BUTTON 2`);
                 setPrevButton({ style: { display: 'inline-block' } });
                 setPrevButtonHidden(false);
             }

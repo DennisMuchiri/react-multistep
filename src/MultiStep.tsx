@@ -67,12 +67,14 @@ export default function MultiStep(props: MultiStepPropsBase) {
     console.debug(`stepStateChanged: ${JSON.stringify(stepState)}`)
 
     ///If steP IS 2 DISABLE
-    if (stepState.nextStep !== undefined && stepState.nextStep!=null&& stepState.nextStep==2){
+    if (stepState.nextStep !== undefined && stepState.nextStep!=null && stepState.nextStep==2){
       console.debug(`stepStateChanged HIDING BUTTON`)
       setPrevButton({style: {display: 'none'}})
       setPrevButtonHidden(true)
     }else{
+      console.debug(`stepStateChanged UNHIDING BUTTON 1`)
       if(prevButtonHidden==true) {
+        console.debug(`stepStateChanged UNHIDING BUTTON 2`)
         setPrevButton({style: {display: 'inline-block'}})
         setPrevButtonHidden(false)
       }
