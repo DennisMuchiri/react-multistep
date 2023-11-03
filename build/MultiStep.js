@@ -78,6 +78,7 @@ function MultiStep(props) {
     const stepStateChanged = (stepState) => {
         console.debug(`stepStateChanged: ${JSON.stringify(stepState)}`);
         if (stepState.nextStep !== undefined && stepState.nextStep != null && stepState.nextStep == 2) {
+            console.debug(`stepStateChanged HIDING BUTTON`);
             setPrevButton({ style: { display: 'none' } });
             setPrevButtonHidden(true);
         }

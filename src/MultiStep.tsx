@@ -68,7 +68,8 @@ export default function MultiStep(props: MultiStepPropsBase) {
 
     ///If steP IS 2 DISABLE
     if (stepState.nextStep !== undefined && stepState.nextStep!=null&& stepState.nextStep==2){
-      setPrevButton({style:{display:'none'}})
+      console.debug(`stepStateChanged HIDING BUTTON`)
+      setPrevButton({style: {display: 'none'}})
       setPrevButtonHidden(true)
     }else{
       if(prevButtonHidden==true) {

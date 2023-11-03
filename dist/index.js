@@ -94,6 +94,7 @@ var require_MultiStep = __commonJS({
       const stepStateChanged = (stepState) => {
         console.debug(`stepStateChanged: ${JSON.stringify(stepState)}`);
         if (stepState.nextStep !== void 0 && stepState.nextStep != null && stepState.nextStep == 2) {
+          console.debug(`stepStateChanged HIDING BUTTON`);
           setPrevButton({ style: { display: "none" } });
           setPrevButtonHidden(true);
         } else {
