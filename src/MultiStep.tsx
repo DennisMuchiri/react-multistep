@@ -55,7 +55,9 @@ export default function MultiStep(props: MultiStepPropsBase) {
   const doingStyle = typeof props.doing === 'undefined' ? {} : props.doing
   const doneStyle = typeof props.done === 'undefined' ? {} : props.done
 
-  const prevButton: NavButton = typeof props.prevButton === 'undefined' ? {} : props.prevButton
+  const [prevButton, setPrevButton] = useState( typeof props.prevButton === 'undefined' ? {} : props.prevButton)
+  const [prevButtonHidden, setPrevButtonHidden] = useState( false)
+  ///const prevButton: NavButton = typeof props.prevButton === 'undefined' ? {} : props.prevButton
   const nextButton: NavButton = typeof props.nextButton === 'undefined' ? {} : props.nextButton
 
   const [stepIsValid, setStepIsValid] = useState(false)
@@ -64,6 +66,17 @@ export default function MultiStep(props: MultiStepPropsBase) {
   const stepStateChanged = (stepState: StepState) => {
     console.debug(`stepStateChanged: ${JSON.stringify(stepState)}`)
 
+    ///If steP IS 2 DISABLE
+    if (stepState.nextStep !== undefined && stepState.nextStep!=null&& stepState.nextStep==2){
+      setPrevButton({style:{display:'none'}})
+      setPrevButtonHidden(true)
+    }else{
+      if(prevButtonHidden==true) {
+        setPrevButton({style: {display: 'inline-block'}})
+        setPrevButtonHidden(false)
+      }
+
+    }
     if (stepState.isValid !== undefined) setStepIsValid(() => stepState.isValid)
     if (stepState.title) nextButton.title = stepState.title
     if (stepState.action) {
@@ -78,7 +91,7 @@ export default function MultiStep(props: MultiStepPropsBase) {
     title: child.props.title,
     component: child
   }))
-  
+
   const [activeStep, setActiveStep] = useState(0)
   const [stylesState, setStylesState] = useState(getTopNavStyles(activeStep, steps.length))
   const [buttonsState, setButtonsState] = useState({
@@ -139,7 +152,7 @@ export default function MultiStep(props: MultiStepPropsBase) {
         </li>
       )
     )
-  
+
   const renderButtonsNav = () => (
     <>
       <button onClick={previous}

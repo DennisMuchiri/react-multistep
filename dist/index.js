@@ -86,12 +86,22 @@ var require_MultiStep = __commonJS({
       const todoStyle = typeof props.todo === "undefined" ? {} : props.todo;
       const doingStyle = typeof props.doing === "undefined" ? {} : props.doing;
       const doneStyle = typeof props.done === "undefined" ? {} : props.done;
-      const prevButton = typeof props.prevButton === "undefined" ? {} : props.prevButton;
+      const [prevButton, setPrevButton] = (0, react_1.useState)(typeof props.prevButton === "undefined" ? {} : props.prevButton);
+      const [prevButtonHidden, setPrevButtonHidden] = (0, react_1.useState)(false);
       const nextButton = typeof props.nextButton === "undefined" ? {} : props.nextButton;
       const [stepIsValid, setStepIsValid] = (0, react_1.useState)(false);
       const [stepAction, setStepAction] = (0, react_1.useState)(null);
       const stepStateChanged = (stepState) => {
         console.debug(`stepStateChanged: ${JSON.stringify(stepState)}`);
+        if (stepState.nextStep !== void 0 && stepState.nextStep != null && stepState.nextStep == 2) {
+          setPrevButton({ style: { display: "none" } });
+          setPrevButtonHidden(true);
+        } else {
+          if (prevButtonHidden == true) {
+            setPrevButton({ style: { display: "inline-block" } });
+            setPrevButtonHidden(false);
+          }
+        }
         if (stepState.isValid !== void 0)
           setStepIsValid(() => stepState.isValid);
         if (stepState.title)
